@@ -12,9 +12,14 @@ import firebase from 'firebase';
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const db =  firebase.database();
-export default{
-  firebase,
-  db
+let app;
+if (firebase.apps.length === 0) {
+  console.info({ firebase });
+  app = firebase.initializeApp(firebaseConfig);
+} else {
+  app = firebase.app();
 }
+const db =  firebase.database();
+const auth = firebase.auth();
+
+export default{firebase, auth, db}

@@ -1,59 +1,80 @@
 import React,{useState, useEffect} from "react";
 import { View, Text ,ScrollView,TextInput,Button} from "react-native";
-import firebase from '../../firebase';
+import firebase from "../../firebase";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 export default function TareasScreen(){
-      const [task, settask] = React.useState('');
+
+      const [task, settask] = useState("");
       const [arrTask,setarrtask] = React.useState({});
       const [check,setCheck] = React.useState(false);
       const [check2, setchec2] = React.useState(false);
 
       useEffect(() => {
-        firebase.db.ref('/user').child('task').get().then((res)=>{
-            let objItem =  res.val();
-
-            if(objItem === null){
-                setCheck(true);
-            }else{
-                setCheck(false)
-                setarrtask(objItem);
-            }
-        }).catch((err)=>{
-          console.log(err);
-
-        });
-      }, [task])
+        getTask();
+        console.log(task);
+      }, [])
     
-      const addTask =()=>{
-          console.log(task)
+      function addTask(){
           if(task===''){
               alert('Insgrese tarea')
           }else{
-            firebase.db.ref('/user').child('task').child(task).set({
-                name: task 
-              }).then((res)=>{
+            firebase.db.ref(task).set({name:task}).then((res)=>{
                   console.log(res)
-                settask('');
+                  settask('');
+                  getTask();
               }).catch(err=>{
                 console.log(err)
               })
-              
+  
           }
          
       }
-      const deleteTask=(id)=>{
-        firebase.db.ref().child("task").child(id).remove();
-        settask('')
+      const getTask =()=>{
+        firebase.db.ref().get().then((res)=>{
+          let objItem =  res.val();
+          if(objItem === null){
+              setCheck(true);
+              setarrtask({});
+          }else{
+              setCheck(false)
+              setarrtask(objItem);
+          }
+      }).catch((err)=>{
+        console.log(err);
+
+      });
+      }
+
+      const deleteTask=  (id)=>{
+        
+        firebase.db.ref(id).remove().then((res)=>{
+          getTask();
+          console.log(res)
+        }).catch((err)=>{
+
+        })
+       
+        
       }
       return(
-          <View>
-              <ScrollView >
+          <View style={{position:"absolute",flex:1,justifyContent:"flex-start",height:"100%",width:"100%",top:0}}>
+              <ScrollView 
+              automaticallyAdjustContentInsets={false} // All of those are props
+              contentInSet={{ bottom: 49 }}
+              horizontal={false}
+              alwaysBounceHorizontal={false}
+              bounces={true}
+              style={{padding:0,margin:0}}
+              decelerationRate="normal"
+              showsHorizontalScrollIndicator={false}
+              scrollEventThrottle={200}
+              pagingEnabled={true}>
                   {(check)?<Text>No hay tareas</Text>:null}
                   {Object.values(arrTask).map((e,index) => 
 
 
-                        <View key={index} >
+                        <View key={index} style={{flexDirection:"row",justifyContent:"space-between",padding:20,borderBottomWidth:3}}>
                             <BouncyCheckbox
                             size={25}
                             fillColor="red"
@@ -61,12 +82,12 @@ export default function TareasScreen(){
                             text={e.name}
                             iconStyle={{ borderColor: "red" }}
                             />
-                            <Button title="Borrar" onPress={()=>{deleteTask(e.name)}}/>
+                            <Button title="Borrar" color="red" onPress={()=>{deleteTask(e.name)}}/>
                             </View>
                 )}
                 </ScrollView>
-                <TextInput value={task} onChange={(e)=>{settask(e.target.value)}} ></TextInput>
-                <Button title="Registrar" onPress={addTask}/>
+                <TextInput value={task} placeholder="Ingrese Tarea" onChangeText={settask} style={{height:40,borderWidth:2,padding:10}}></TextInput>
+                <Button title="Registrar"color="#1E6738" style={{backgroundColor:"red"}} onPress={addTask}/>
           </View>
     );
 }
