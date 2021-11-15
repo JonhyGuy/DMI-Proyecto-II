@@ -5,7 +5,7 @@ export default function PerfilScreen(){
     return(
         <View>
             <Text>
-                Perfil!!
+                Imagen de Perfil
             </Text>
         </View>
     );
