@@ -10,7 +10,7 @@ export default function TareasScreen(){
       const [check2, setchec2] = React.useState(false);
 
       useEffect(() => {
-        firebase.db.ref('/user').get().then((res)=>{
+        firebase.db.ref('/user').child('task').get().then((res)=>{
             let objItem =  res.val();
 
             if(objItem === null){
@@ -30,7 +30,7 @@ export default function TareasScreen(){
           if(task===''){
               alert('Insgrese tarea')
           }else{
-            firebase.db.ref('/user').child('task').set({
+            firebase.db.ref('/user').child('task').child(task).set({
                 name: task 
               }).then((res)=>{
                   console.log(res)
