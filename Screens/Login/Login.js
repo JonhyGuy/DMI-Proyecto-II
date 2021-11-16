@@ -1,11 +1,8 @@
 import { useNavigation } from "@react-navigation/core";
-import { StyledView, StyledInput,StyledButtons, StyledButtonText, StyledText  } from "./LoginStyle";
+import { StyledView, StyledInput,StyledButtons, StyledButtonText, StyledText, StyledImage  } from "./LoginStyle";
 import React, { useEffect, useState } from "react";
-
 import { auth } from "../../firebase";
-
-
-
+import { View, Image } from "react-native";
 
 const Login = () =>{
   const navigation = useNavigation();
@@ -54,6 +51,7 @@ const Login = () =>{
   
   return (
     <StyledView>
+      <StyledImage source = {require ("../../assets/logo.jpg") } />
       <StyledInput
           placeholder="Email"
           value={email}
@@ -65,16 +63,14 @@ const Login = () =>{
           onChangeText={(text) => setPwd(text)} 
           secureTextEntry/>
 
-      <StyledButtons  onPress={handleLogin}>
+      <StyledButtons style = {{}} onPress={handleLogin}>
         <StyledButtonText>Login</StyledButtonText>
       </StyledButtons>
 
       <StyledText onPress={() => navigation.replace('Singup')}>
-      Don't have an account? Register here!
-        </StyledText>
-        <StyledText onPress={handleSignup}>
-      Register
-        </StyledText>
+        Don't have an account? Register here!
+      </StyledText>
+
 
     </StyledView>
     
