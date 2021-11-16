@@ -1,3 +1,4 @@
+
 import React,{useState, useEffect} from "react";
 import { View, Text ,ScrollView,TextInput,Button} from "react-native";
 import firebase from "../../firebase";
@@ -89,5 +90,71 @@ export default function TareasScreen(){
                 <TextInput value={task} placeholder="Ingrese Tarea" onChangeText={settask} style={{height:40,borderWidth:2,padding:10}}></TextInput>
                 <Button title="Registrar"color="#1E6738" style={{backgroundColor:"red"}} onPress={addTask}/>
           </View>
+
     );
 }
+const styles = StyleSheet.create({
+
+    container: {
+  
+      flex: 1,
+  
+      // alignItems: "center",
+  
+      justifyContent: "center",
+  
+    },
+  
+    button: {
+  
+      backgroundColor: "#0782F9",
+  
+      width: "60%",
+  
+      padding: 15,
+  
+      borderRadius: 10,
+  
+      alignItems: "center",
+  
+      marginTop: 40,
+  
+    },
+  
+    buttonText: {
+  
+      color: "white",
+  
+      fontWeight: "700",
+  
+      fontSize: 16,
+  
+    },
+  
+    buttonOutlineText: {
+  
+      color: "#0782F9",
+  
+      fontWeight: "700",
+  
+      fontSize: 16,
+  
+    },
+  
+    buttonOutline: {
+  
+      backgroundColor: "white",
+  
+      marginTop: 5,
+  
+      borderColor: "#0782F9",
+  
+      borderWidth: 2,
+  
+    },
+  
+  
+  
+  
+  
+  });
