@@ -1,7 +1,6 @@
-import firebase from 'firebase';
- import 'firebase/firestore';
+import firebase from "firebase";
 
- const firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyDP9q2kx5CO5Y4Ti_a4FRVG4C9QOZVzGhM",
   authDomain: "dmi2-4b2ca.firebaseapp.com",
   databaseURL: "https://dmi2-4b2ca-default-rtdb.firebaseio.com",
@@ -12,9 +11,14 @@ import firebase from 'firebase';
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const db =  firebase.database();
-export default{
-  firebase,
-  db
+let app;
+if (firebase.apps.length === 0) {
+  console.info({ firebase });
+  app = firebase.initializeApp(firebaseConfig);
+} else {
+  app = firebase.app();
 }
+
+const auth = firebase.auth();
+
+export { auth };
