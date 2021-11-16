@@ -58,17 +58,17 @@ const Login = () =>{
           placeholder="Email"
           value={email}
           onChangeText={(text) => setEmail(text)}/>
-      <br/>
+
       <StyledInput 
           placeholder="Password"
           value={pwd}
           onChangeText={(text) => setPwd(text)} 
           secureTextEntry/>
-      <br/>
+
       <StyledButtons  onPress={handleLogin}>
         <StyledButtonText>Login</StyledButtonText>
       </StyledButtons>
-      <br/>
+
       <StyledText onPress={() => navigation.replace('Singup')}>
       Don't have an account? Register here!
         </StyledText>

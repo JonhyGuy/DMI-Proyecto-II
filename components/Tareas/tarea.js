@@ -33,7 +33,7 @@ export default function TareasScreen() {
     if (task === '') {
       alert('Insgrese tarea')
     } else {
-      db.ref(user).child(task).set({ name: task }).then((res) => {
+      db.ref(user).child(task).set({ name: task,status:false }).then((res) => {
         console.log(res)
         settask('');
         getTask();
@@ -68,8 +68,13 @@ export default function TareasScreen() {
     }).catch((err) => {
 
     })
-
-
+  }
+  const changeStatus = (status, id)=>{
+    db.ref(user).child(id).set({name:id,status:status}).then(res=>{
+      getTask();
+    }).catch(err=>{
+      console.log(err)
+    })
   }
   return (
     <View style={{ position: "absolute", flex: 1, justifyContent: "flex-start", height: "100%", width: "100%", top: 0 }}>
@@ -95,6 +100,8 @@ export default function TareasScreen() {
               unfillColor="#FFFFFF"
               text={e.name}
               iconStyle={{ borderColor: "red" }}
+              isChecked={e.status}
+              onPress={(isChecked) => {changeStatus(isChecked,e.name)}}
             />
             <Button title="Borrar" color="red" onPress={() => { deleteTask(e.name) }} />
           </View>
