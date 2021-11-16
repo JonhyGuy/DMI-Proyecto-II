@@ -1,7 +1,11 @@
-import firebase from 'firebase';
- import 'firebase/firestore';
+// Import firebase
+import firebase from "firebase";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
- const firebaseConfig = {
+// Your web app's Firebase configuration, you have to paste here the object that comes from firebase
+
+const firebaseConfig = {
   apiKey: "AIzaSyDP9q2kx5CO5Y4Ti_a4FRVG4C9QOZVzGhM",
   authDomain: "dmi2-4b2ca.firebaseapp.com",
   databaseURL: "https://dmi2-4b2ca-default-rtdb.firebaseio.com",
@@ -12,9 +16,19 @@ import firebase from 'firebase';
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const db =  firebase.database();
-export default{
-  firebase,
-  db
+let app;
+
+if (firebase.apps.length === 0) {
+  console.info({ firebase });
+  app = firebase.initializeApp(firebaseConfig);
+} else {
+  app = firebase.app();
 }
+
+const storage = firebase.storage();
+
+const db = firebase.database();
+
+const auth = firebase.auth();
+
+export { auth, storage, db, firebase };
