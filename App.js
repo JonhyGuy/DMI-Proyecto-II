@@ -7,12 +7,25 @@ import PerfilScreen from './components/Perfil/perfil';
 import TareasScreen from './components/Tareas/tarea';
 import Login from './Screens/Login/Login';
 import Singup from './Screens/Singup/Singup';
+import { auth } from "./firebase";
+import { useNavigation } from "@react-navigation/core";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-function Yourtabs(){
-  return(
+function Yourtabs() {
+  const navigation = useNavigation();
+  const handleSignOut = () => {
+    auth
+      .signOut()
+      .then(() => {
+        navigation.replace("Login");
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  };
+  return (
     <Tab.Navigator screenOptions={({ route }) => ({
       tabBarIcon: ({ focused, color, size }) => {
         let iconName;
@@ -30,9 +43,9 @@ function Yourtabs(){
       tabBarActiveTintColor: "#000",
       tabBarInactiveTintColor: "grey",
     })}>
-    <Tab.Screen name="Tareas" component={TareasScreen} />
-    <Tab.Screen name="Perfil" component={PerfilScreen} />
-  </Tab.Navigator>
+      <Tab.Screen name="Tareas" component={TareasScreen} />
+      <Tab.Screen name="Perfil" component={PerfilScreen} />
+    </Tab.Navigator>
   )
 }
 
@@ -42,20 +55,20 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
-       <Stack.Screen name="Login" options={{ headerShown: false }}>
+        <Stack.Screen name="Login" options={{ headerShown: false }}>
           {(props) => <Login {...props} />}
         </Stack.Screen>
-        <Stack.Screen name="Singup" options={{ headerShown: false}}>
+        <Stack.Screen name="Singup" options={{ headerShown: false }}>
           {(props) => <Singup {...props} />}
         </Stack.Screen>
 
-        <Stack.Screen 
-        name='Yourtabs'
-        options={{ headerShown: false }}
-        component={Yourtabs}
+        <Stack.Screen
+          name='Yourtabs'
+          options={{ headerShown: false }}
+          component={Yourtabs}
         />
       </Stack.Navigator>
-      
+
     </NavigationContainer>
 
   );
