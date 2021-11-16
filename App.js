@@ -9,12 +9,14 @@ import Login from './Screens/Login/Login';
 import Singup from './Screens/Singup/Singup';
 import { auth } from "./firebase";
 import { useNavigation } from "@react-navigation/core";
+import { TouchableOpacity, Text } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 function Yourtabs() {
   const navigation = useNavigation();
+
   const handleSignOut = () => {
     auth
       .signOut()
@@ -43,8 +45,26 @@ function Yourtabs() {
       tabBarActiveTintColor: "#000",
       tabBarInactiveTintColor: "grey",
     })}>
-      <Tab.Screen name="Tareas" component={TareasScreen} />
-      <Tab.Screen name="Perfil" component={PerfilScreen} />
+      <Tab.Screen name="Tareas" component={TareasScreen} options={{
+        headerRight: () => (
+          <TouchableOpacity
+            onPress={handleSignOut}
+            color="#000"
+          >
+            <Text>Log Out</Text>
+          </TouchableOpacity>
+        ),
+      }} />
+      <Tab.Screen name="Perfil" component={PerfilScreen} options={{
+        headerRight: () => (
+          <TouchableOpacity
+            onPress={handleSignOut}
+            color="#000"
+          >
+            <Text>Log Out</Text>
+          </TouchableOpacity>
+        ),
+      }} />
     </Tab.Navigator>
   )
 }
