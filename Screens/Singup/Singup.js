@@ -13,6 +13,7 @@ import {
 /*import { auth } from "../../firebase";*/
 
 import { auth } from "../../firebase";
+import { StyledButtons, StyledButtonText, StyledImage, StyledInput, StyledView } from "../Login/LoginStyle";
 const Singup = () =>{
     const [email, setEmail] = useState("");
     const [pwd, setPwd] = useState("");
@@ -43,16 +44,17 @@ const Singup = () =>{
       };
     return(
    // KeyboardAvoidingView is a type of view that will push the content up when a keyboard shows
-   <KeyboardAvoidingView style={styles.container} behavior="padding">
-   <View style={styles.inputContainer}>
+  
+   <StyledView >
      {/* We have 2 text inputs that will set the state our our constants (email, pdw) */}
-     <TextInput
+     <StyledImage source = {require ("../../assets/Profile.png") } />
+     <StyledInput
        placeholder="Email"
        value={email}
        onChangeText={(text) => setEmail(text)}
        style={styles.input}
      />
-     <TextInput
+     <StyledInput
        placeholder="Password"
        value={pwd}
        onChangeText={(text) => setPwd(text)}
@@ -60,17 +62,15 @@ const Singup = () =>{
        secureTextEntry
      />
 
-   </View>
-   {/* We have 2 buttons that will execute the functions above) */}
-   <View style={styles.buttonContainer}>
-     <TouchableOpacity onPress={handleSignup} style={[styles.button]}>
-       <Text style={styles.buttonOutlineText}>Sign Up</Text>
-     </TouchableOpacity>
-     <TouchableOpacity onPress={handleLogin} style={styles.button, styles.buttonOutline}>
-       <Text style={styles.buttonText}>Login</Text>
-     </TouchableOpacity>
-   </View>
- </KeyboardAvoidingView>
+     <StyledButtons onPress={handleSignup}>
+       <StyledButtonText>Sign Up</StyledButtonText>
+     </StyledButtons>
+     <StyledButtons onPress={handleLogin} >
+       <StyledButtonText>Back</StyledButtonText>
+     </StyledButtons>
+
+   </StyledView>
+
 );
 };
 export default Singup;

@@ -14,6 +14,9 @@ import {
   ScrollView,
   Button
 } from "react-native";
+import { StyledViewTareas, StyledScrollView, StyledTitleContainer,StyledTextButton,StyledDeleteButton, StyledTitleText, StyledElementList, StyledInput, StyledButtons, StyledButtonAdd } from "../../styles/styledComponets";
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 
 export default function TareasScreen() {
 
@@ -31,7 +34,7 @@ export default function TareasScreen() {
 
   function addTask() {
     if (task === '') {
-      alert('Insgrese tarea')
+      alert('Ingrese una tarea')
     } else {
       db.ref(user).child(task).set({ name: task,status:false }).then((res) => {
         console.log(res)
@@ -77,104 +80,41 @@ export default function TareasScreen() {
     })
   }
   return (
-    <View style={{ position: "absolute", flex: 1, justifyContent: "flex-start", height: "100%", width: "100%", top: 0 }}>
-      <ScrollView
+    <StyledViewTareas>
+      <StyledScrollView
         automaticallyAdjustContentInsets={false} // All of those are props
         contentInSet={{ bottom: 49 }}
         horizontal={false}
         alwaysBounceHorizontal={false}
         bounces={true}
-        style={{ padding: 0, margin: 0 }}
         decelerationRate="normal"
         showsHorizontalScrollIndicator={false}
         scrollEventThrottle={200}
         pagingEnabled={true}>
-        {(check) ? <Text>No hay tareas</Text> : null}
+        {(check) ? <StyledTitleContainer><StyledTitleText>No hay tareas</StyledTitleText></StyledTitleContainer> : null}
         {Object.values(arrTask).map((e, index) =>
 
-
-          <View key={index} style={{ flexDirection: "row", justifyContent: "space-between", padding: 20, borderBottomWidth: 3 }}>
+          <StyledElementList key={index}>
             <BouncyCheckbox
               size={25}
-              fillColor="red"
+              fillColor="#cc74ec"
               unfillColor="#FFFFFF"
               text={e.name}
-              iconStyle={{ borderColor: "red" }}
+              iconStyle={{ borderColor: "#cc74ec" }}
               isChecked={e.status}
               onPress={(isChecked) => {changeStatus(isChecked,e.name)}}
             />
-            <Button title="Borrar" color="red" onPress={() => { deleteTask(e.name) }} />
-          </View>
+
+            <StyledDeleteButton onPress={() => {deleteTask(e.name)}}>
+              <Ionicons name={'ios-trash'} size= {20} color= {'white'} />
+            </StyledDeleteButton>
+            
+          </StyledElementList>
         )}
-      </ScrollView>
-      <TextInput value={task} placeholder="Ingrese Tarea" onChangeText={settask} style={{ height: 40, borderWidth: 2, padding: 10 }}></TextInput>
-      <Button title="Registrar" color="#1E6738" style={{ backgroundColor: "red" }} onPress={addTask} />
-    </View>
+      </StyledScrollView>
+      <StyledInput value={task} placeholder="Ingrese tarea" onChangeText={settask}></StyledInput>
+      <StyledButtonAdd onPress = {addTask}><StyledTextButton>Agregar</StyledTextButton></StyledButtonAdd>
+    </StyledViewTareas>
 
   );
 }
-const styles = StyleSheet.create({
-
-  container: {
-
-    flex: 1,
-
-    // alignItems: "center",
-
-    justifyContent: "center",
-
-  },
-
-  button: {
-
-    backgroundColor: "#0782F9",
-
-    width: "60%",
-
-    padding: 15,
-
-    borderRadius: 10,
-
-    alignItems: "center",
-
-    marginTop: 40,
-
-  },
-
-  buttonText: {
-
-    color: "white",
-
-    fontWeight: "700",
-
-    fontSize: 16,
-
-  },
-
-  buttonOutlineText: {
-
-    color: "#0782F9",
-
-    fontWeight: "700",
-
-    fontSize: 16,
-
-  },
-
-  buttonOutline: {
-
-    backgroundColor: "white",
-
-    marginTop: 5,
-
-    borderColor: "#0782F9",
-
-    borderWidth: 2,
-
-  },
-
-
-
-
-
-});

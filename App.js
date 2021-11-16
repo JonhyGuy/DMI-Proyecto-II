@@ -10,6 +10,7 @@ import Singup from './Screens/Singup/Singup';
 import { auth } from "./firebase";
 import { useNavigation } from "@react-navigation/core";
 import { TouchableOpacity, Text } from 'react-native';
+import { StyledButtonOut, StyledTextOut } from './styles/styledComponets';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -42,27 +43,22 @@ function Yourtabs() {
         }
         return <Ionicons name={iconName} size={size} color={color} />;
       },
-      tabBarActiveTintColor: "#000",
-      tabBarInactiveTintColor: "grey",
+      tabBarActiveTintColor: "#5F366E",
+      tabBarInactiveTintColor: "gray",
     })}>
       <Tab.Screen name="Tareas" component={TareasScreen} options={{
         headerRight: () => (
-          <TouchableOpacity
-            onPress={handleSignOut}
-            color="#000"
-          >
-            <Text>Log Out</Text>
-          </TouchableOpacity>
+          <StyledButtonOut onPress={handleSignOut}>
+            <Ionicons name={'ios-log-out'} size= {20} color= {'white'} />
+          </StyledButtonOut>
         ),
+        
       }} />
       <Tab.Screen name="Perfil" component={PerfilScreen} options={{
         headerRight: () => (
-          <TouchableOpacity
-            onPress={handleSignOut}
-            color="#000"
-          >
-            <Text>Log Out</Text>
-          </TouchableOpacity>
+          <StyledButtonOut onPress={handleSignOut}>
+            <Ionicons name={'ios-log-out'} size= {20} color= {'white'} />
+          </StyledButtonOut>
         ),
       }} />
     </Tab.Navigator>
