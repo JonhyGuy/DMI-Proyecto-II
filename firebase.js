@@ -22,12 +22,15 @@ let app;
 
 
 
+
+
 if (firebase.apps.length === 0) {
   console.info({ firebase });
   app = firebase.initializeApp(firebaseConfig);
 } else {
   app = firebase.app();
 }
+
 
 
 const storage = firebase.storage();
@@ -37,4 +40,5 @@ const db = firebase.database();
 const auth = firebase.auth();
 
 export { auth, storage, db, firebase };
+
 
