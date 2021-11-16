@@ -11,6 +11,7 @@ import {
 } from "react-native";
 // auth is an instance of firebase.auth() and it is imported from the firebase.js file
 /*import { auth } from "../../firebase";*/
+
 import { auth } from "../../firebase";
 const Singup = () =>{
     const [email, setEmail] = useState("");
@@ -126,3 +127,4 @@ const styles = StyleSheet.create({
       marginBottom: 20,
     },
   });
+
