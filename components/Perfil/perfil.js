@@ -6,7 +6,7 @@ import { Camera } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
 import { SpeedDial } from 'react-native-elements';
 
-import { storage, auth } from "../../firebase";
+import { storage, auth, db } from "../../firebase";
 import {  StyledContainerImage, StyledImage,  StyledViewContainer, StyledButtonBack, StyledTextButton, StyledContainerCamera, StyledTitleText } from "../../styles/styledComponets";
 
 export default function PerfilScreen() {
@@ -51,6 +51,8 @@ export default function PerfilScreen() {
 
     const __getProfilePhoto = async () => {
         await storage.ref(user+"/profile").getDownloadURL().then(profile => {
+            console.log("Este es el perfil")
+            console.log(profile);
             setPhoto(profile);
             setCapturedImage(null);
         }).catch(e => {
@@ -58,7 +60,7 @@ export default function PerfilScreen() {
             setCapturedImage(null);
         });
     }
-
+    
     const __back = () => {
         setStartCamera(false);
         setPreviewVisible(true);
@@ -104,7 +106,8 @@ export default function PerfilScreen() {
                         <StyledContainerImage>
                             <StyledTitleText>Administra tu perfil</StyledTitleText>
                             <StyledImage source={{ uri: photo }} />
-                            
+                            <StyledTitleText>Email:</StyledTitleText>
+                            <StyledTitleText>{auth.currentUser.email}</StyledTitleText>
                         </StyledContainerImage>
                         {
                             (!guardar) ?

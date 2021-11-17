@@ -82,6 +82,7 @@ export const StyledImage = styled.Image`
     height: 300px;
     border-radius: 200px;
     margin-top: 100px;
+    margin-bottom: 60px;
 `;
 
 export const StyledViewButtons = styled.View`
