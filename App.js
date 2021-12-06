@@ -3,14 +3,16 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import PerfilScreen from './components/Perfil/perfil';
-import TareasScreen from './components/Tareas/tarea';
-import Login from './Screens/Login/Login';
-import Singup from './Screens/Singup/Singup';
+
 import { auth } from "./firebase";
 import { useNavigation } from "@react-navigation/core";
 import { TouchableOpacity, Text } from 'react-native';
 import { StyledButtonOut, StyledTextOut } from './styles/styledComponets';
+
+import PerfilScreen from './components/Perfil/perfil';
+import TareasScreen from './components/Tareas/tarea';
+import Login from './Screens/Login/Login';
+import Singup from './Screens/Singup/Singup';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();

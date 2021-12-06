@@ -56,25 +56,18 @@ const Login = () =>{
           placeholder="Email"
           value={email}
           onChangeText={(text) => setEmail(text)}/>
-
       <StyledInput 
           placeholder="Password"
           value={pwd}
           onChangeText={(text) => setPwd(text)} 
           secureTextEntry/>
-
       <StyledButtons style = {{}} onPress={handleLogin}>
         <StyledButtonText>Login</StyledButtonText>
       </StyledButtons>
-
       <StyledText onPress={() => navigation.replace('Singup')}>
         Don't have an account? Register here!
       </StyledText>
-
-
     </StyledView>
-    
-
   );
 }
 export default Login;
