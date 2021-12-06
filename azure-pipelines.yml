@@ -1,0 +1,54 @@
+# Node.js with React
+# Build a Node.js project that uses React.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '16.10.0'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install
+  displayName: 'npm install and build'
+
+- task: FtpUpload@2
+  inputs:
+    credentialsOption: 'inputs'
+    serverUrl: 'ftp://jonhyproyecto123.freevar.com'
+    username: 'jonhyproyecto123.freevar.com'
+    password: 'Lottotenis1609'
+    rootDirectory: 'Screens/Login'
+    filePatterns: '**'
+    remoteDirectory: '/home/vhosts/jonhyproyecto123.freevar.com'
+    clean: false
+    cleanContents: false
+    preservePaths: false
+    trustSSL: false
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'Sonar-Devops Practice'
+    organization: '181532'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: '181532_Practica-Sonar'
+    cliProjectName: 'Practica-Sonar'
+    cliSources: '/'
+
+- task: SonarCloudAnalyze@1
+
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: Artefacto Final_Project
