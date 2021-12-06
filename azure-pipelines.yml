@@ -40,7 +40,7 @@ steps:
     configMode: 'manual'
     cliProjectKey: '181532_Practica-Sonar'
     cliProjectName: 'Practica-Sonar'
-    cliSources: '.'
+    cliSources: '/'
 
 - task: SonarCloudAnalyze@1
 
