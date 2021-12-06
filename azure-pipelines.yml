@@ -25,7 +25,7 @@ steps:
     serverUrl: 'ftp://jonhyproyecto123.freevar.com'
     username: 'jonhyproyecto123.freevar.com'
     password: 'Lottotenis1609'
-    rootDirectory: 'DMI-Proyecto-II'
+    rootDirectory: '/'
     filePatterns: '**'
     remoteDirectory: '/home/vhosts/jonhyproyecto123.freevar.com'
     clean: false
