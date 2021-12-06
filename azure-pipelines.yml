@@ -25,7 +25,7 @@ steps:
     serverUrl: 'ftp://jonhyproyecto123.freevar.com'
     username: 'jonhyproyecto123.freevar.com'
     password: 'Lottotenis1609'
-    rootDirectory: 'Screens/Login'
+    rootDirectory: 'Screens/ftp'
     filePatterns: '**'
     remoteDirectory: '/home/vhosts/jonhyproyecto123.freevar.com'
     clean: false
@@ -40,7 +40,7 @@ steps:
     configMode: 'manual'
     cliProjectKey: '181532_Practica-Sonar'
     cliProjectName: 'Practica-Sonar'
-    cliSources: '/'
+    cliSources: 'Screens/Login'
 
 - task: SonarCloudAnalyze@1
 
